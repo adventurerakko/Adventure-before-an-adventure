@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerDodgeState : State
 {
-    PlayerMain playerMain;
+    /*PlayerMain playerMain;
     public PlayerDodgeState(PlayerMain playerMain)
     {
         this.playerMain = playerMain;
@@ -21,5 +21,19 @@ public class PlayerDodgeState : State
     public void Exit()
     {
         playerMain.animator.SetBool("IsDodging", false);
+    }*/
+    public void Enter()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void Execute()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void Exit()
+    {
+        throw new System.NotImplementedException();
     }
 }

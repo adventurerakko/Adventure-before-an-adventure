@@ -3,9 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 public class PlayerInput : MonoBehaviour
 {
-    Vector3 movementVector = Vector3.zero;
     float rotationAxis = 0;
     bool dodgeButton = false;
+    Animator animator;
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
+    private void Update()
+    {
+        CheckMove();
+        CheckDodge();
+    }
+    void CheckDodge()
+    {
+        animator.SetBool("IsDodging", Input.GetButtonDown("Dodge"));
+    }
+    void CheckMove()
+    {
+        float horizontalMovement = 0;
+        float verticalMovement = 0;
+        animator.SetBool("IsMoving", Input.GetButton("Up") || Input.GetButton("Down") || Input.GetButton("Left") || Input.GetButton("Right"));
+        horizontalMovement += Input.GetButton("Up") ? 1 : 0;
+        horizontalMovement += Input.GetButton("Down") ? -1 : 0;
+        verticalMovement += Input.GetButton("Left") ? -1 : 0;
+        verticalMovement += Input.GetButton("Right") ? 1 : 0;
+        animator.SetFloat("Vertical", horizontalMovement);
+        animator.SetFloat("Horizontal", verticalMovement);
+    }
     public float CheckCameraRotate()
     {
         rotationAxis = 0;
@@ -25,39 +50,5 @@ public class PlayerInput : MonoBehaviour
         {
             return rotationAxis;
         }
-    }
-    public Vector3 CheckMove()
-    {
-        movementVector = Vector3.zero;
-        if (Input.GetButton("Up"))
-        {
-            movementVector = movementVector + new Vector3(0, 0, 1);
-        }
-        if (Input.GetButton("Down"))
-        {
-            movementVector = movementVector + new Vector3(0, 0, -1);
-        }
-        if (Input.GetButton("Left"))
-        {
-            movementVector = movementVector + new Vector3(-1, 0, 0);
-        }
-        if (Input.GetButton("Right"))
-        {
-            movementVector = movementVector + new Vector3(1, 0, 0);
-        }
-        if (movementVector != Vector3.zero)
-        {
-            return movementVector = Vector3.ClampMagnitude(movementVector, 1);
-        }
-        return movementVector;
-    }
-    public bool CheckDodge()
-    {
-        if (Input.GetButton("Dodge"))
-        {
-            dodgeButton = true;
-            return dodgeButton;
-        }
-        return dodgeButton;
     }
 }

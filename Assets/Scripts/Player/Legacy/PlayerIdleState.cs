@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerIdleState : State
 {
-    PlayerMain playerMain;
+    /*PlayerMain playerMain;
     public PlayerIdleState(PlayerMain playerMain)
     {
         this.playerMain = playerMain;
@@ -23,5 +23,19 @@ public class PlayerIdleState : State
 
     public void Exit()
     {
+    }*/
+    public void Enter()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void Execute()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void Exit()
+    {
+        throw new System.NotImplementedException();
     }
 }
