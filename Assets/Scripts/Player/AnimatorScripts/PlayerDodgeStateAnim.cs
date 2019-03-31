@@ -13,9 +13,9 @@ public class PlayerDodgeStateAnim : StateMachineBehaviour
 
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        characterController = animator.GetComponent<CharacterController>();
         playerMain = animator.GetComponent<PlayerMain>();
         playerMain.currentStateName = "Dodge";
-        characterController = animator.GetComponent<CharacterController>();
 
         if (animator.GetBool("IsMoving"))
         {
@@ -34,5 +34,4 @@ public class PlayerDodgeStateAnim : StateMachineBehaviour
             return;
         characterController.Move(movementVector * dodgeDistance * Time.deltaTime * animationCurve.Evaluate(stateInfo.normalizedTime));
     }
-
 }

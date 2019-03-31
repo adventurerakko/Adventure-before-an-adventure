@@ -3,52 +3,35 @@ using System.Collections.Generic;
 using UnityEngine;
 public class PlayerInput : MonoBehaviour
 {
-    float rotationAxis = 0;
-    bool dodgeButton = false;
-    Animator animator;
-    private void Start()
+    public bool CheckAttackInput()
     {
-        animator = GetComponent<Animator>();
+        return Input.GetButtonDown("Attack");
     }
-    private void Update()
+    public bool CheckDodgeInput()
     {
-        CheckMove();
-        CheckDodge();
+        return Input.GetButtonDown("Dodge");
     }
-    void CheckDodge()
-    {
-        animator.SetBool("IsDodging", Input.GetButtonDown("Dodge"));
-    }
-    void CheckMove()
+    public Vector3 CheckMoveInput()
     {
         float horizontalMovement = 0;
         float verticalMovement = 0;
-        animator.SetBool("IsMoving", Input.GetButton("Up") || Input.GetButton("Down") || Input.GetButton("Left") || Input.GetButton("Right"));
-        horizontalMovement += Input.GetButton("Up") ? 1 : 0;
-        horizontalMovement += Input.GetButton("Down") ? -1 : 0;
-        verticalMovement += Input.GetButton("Left") ? -1 : 0;
-        verticalMovement += Input.GetButton("Right") ? 1 : 0;
-        animator.SetFloat("Vertical", horizontalMovement);
-        animator.SetFloat("Horizontal", verticalMovement);
+        verticalMovement += Input.GetButton("Up") ? 1 : 0;
+        verticalMovement += Input.GetButton("Down") ? -1 : 0;
+        horizontalMovement += Input.GetButton("Left") ? -1 : 0;
+        horizontalMovement += Input.GetButton("Right") ? 1 : 0;
+        Vector3 movementVector = new Vector3(horizontalMovement, 0, verticalMovement);
+        return movementVector;
     }
-    public float CheckCameraRotate()
+    public float CheckCameraRotateInput()
     {
-        rotationAxis = 0;
+        float rotationAxis = 0;
         if (Input.GetButton("RotateCameraLeft") || Input.GetButton("RotateCameraRight"))
         {
             if (Input.GetButton("RotateCameraLeft"))
-            {
                 rotationAxis -= 1;
-            }
             if (Input.GetButton("RotateCameraRight"))
-            {
                 rotationAxis += 1;
-            }
-            return rotationAxis;
         }
-        else
-        {
-            return rotationAxis;
-        }
+        return rotationAxis;
     }
 }

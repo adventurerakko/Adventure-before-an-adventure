@@ -15,6 +15,5 @@ public class PlayerIdleStateAnim : StateMachineBehaviour
     {
         if (playerMain.currentStateName != "Idle")
             return;
-        
     }
 }

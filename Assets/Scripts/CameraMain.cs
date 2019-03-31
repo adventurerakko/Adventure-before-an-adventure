@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.Assertions;
 public class CameraMain : MonoBehaviour
 {
-    // Start is called before the first frame update
     [SerializeField] GameObject target = null;
     [SerializeField] float cameraOffsetDistance = 40, smoothFollowSpeed = 0.1F, rotationSpeed = 120F;
     Vector3 smoothFollowTarget = Vector3.zero;
@@ -13,7 +12,6 @@ public class CameraMain : MonoBehaviour
         Assert.IsNotNull(target);
     }
 
-    // Update is called once per frame
     void Update()
     {
         smoothFollowTarget = Vector3.Lerp(smoothFollowTarget, target.transform.position, smoothFollowSpeed);
