@@ -5,7 +5,7 @@ using UnityEngine.Assertions;
 public class CameraMain : MonoBehaviour
 {
     [SerializeField] GameObject target = null;
-    [SerializeField] float cameraOffsetDistance = 40, smoothFollowSpeed = 0.1F, rotationSpeed = 120F;
+    [SerializeField] float cameraOffsetDistance = 40, smoothFollowSpeed = 0.1F, rotationSpeed = 120F, smoothCameraLockSpeed = 0.1f;
     Vector3 smoothFollowTarget = Vector3.zero;
     void Start()
     {
@@ -22,5 +22,9 @@ public class CameraMain : MonoBehaviour
         this.transform.rotation = Quaternion.Euler(this.transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y + (rotationAxis * rotationSpeed * Time.deltaTime), this.transform.rotation.eulerAngles.z);
         this.transform.position = smoothFollowTarget + -transform.forward * cameraOffsetDistance;
 
+    }
+    public void LockCamera(float playerVerticalRotation)
+    {
+        this.transform.rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.Euler(new Vector3(this.transform.rotation.eulerAngles.x, playerVerticalRotation, this.transform.rotation.eulerAngles.z)), smoothCameraLockSpeed);
     }
 }

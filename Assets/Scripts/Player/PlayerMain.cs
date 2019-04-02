@@ -48,10 +48,20 @@ public class PlayerMain : MonoBehaviour
     }
     void Update()
     {
+        CheckCameraLock();
         CheckCameraRotate();
         CheckMovement();
         CheckAttack();
         CheckDodge();
+    }
+    void CheckCameraLock()
+    {
+        bool cameraLock = playerInput.CheckCameraLockInput();
+        if (cameraLock)
+        {
+            cameraMain.LockCamera(this.transform.rotation.eulerAngles.y);
+        }
+        animator.SetBool("IsLockedOn", cameraLock);
     }
     void CheckCameraRotate()
     {

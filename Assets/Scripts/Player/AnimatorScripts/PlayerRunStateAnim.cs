@@ -24,7 +24,7 @@ public class PlayerRunStateAnim : StateMachineBehaviour
         Vector3 movementVector = new Vector3(animator.GetFloat("Horizontal"), 0, animator.GetFloat("Vertical"));
         Quaternion cameraRotation = Quaternion.Euler(0, playerMain.cameraMain.transform.rotation.eulerAngles.y, 0);
         characterController.Move(cameraRotation * movementVector * movementSpeed * Time.deltaTime);
-        if (animator.GetBool("IsMoving"))
+        if (animator.GetBool("IsMoving") && !animator.GetBool("IsLockedOn"))
         {
             characterController.transform.rotation = Quaternion.Slerp(playerMain.characterController.transform.rotation, Quaternion.LookRotation(cameraRotation * movementVector), Time.deltaTime * turnSpeed);
         }

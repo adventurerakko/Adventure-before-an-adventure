@@ -22,6 +22,10 @@ public class PlayerInput : MonoBehaviour
         Vector3 movementVector = new Vector3(horizontalMovement, 0, verticalMovement);
         return movementVector;
     }
+    public bool CheckCameraLockInput()
+    {
+        return Input.GetButton("CameraLock");
+    }
     public float CheckCameraRotateInput()
     {
         float rotationAxis = 0;
