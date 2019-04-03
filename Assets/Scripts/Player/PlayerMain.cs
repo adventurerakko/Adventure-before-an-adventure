@@ -7,6 +7,9 @@ public class PlayerMain : MonoBehaviour
     [SerializeField] public CameraMain cameraMain;
     Animator animator;
 
+    [SerializeField] float pickUpDistance = 10f;
+    GameObject holdingObject = null;
+
     [HideInInspector] public PlayerInput playerInput;
     [HideInInspector] public CharacterController characterController;
     [HideInInspector] public List<string> animParameterList = new List<string>();
@@ -52,7 +55,30 @@ public class PlayerMain : MonoBehaviour
         CheckCameraRotate();
         CheckMovement();
         CheckAttack();
+        CheckPickThrow();
         CheckDodge();
+    }
+    void CheckPickThrow()
+    {
+        bool pickThrow = playerInput.CheckPickThrowInput();
+        if (pickThrow && !holdingObject)
+        {
+            RaycastHit hit;
+            if(Physics.SphereCast(transform.position + new Vector3(0, characterController.height, 0), characterController.height, transform.forward, out hit, pickUpDistance))
+            {
+                var throwable = hit.transform.gameObject.GetComponent<Throwable>();
+                if (throwable)
+                {
+                    throwable.PickUpThrowable(this.transform);
+                    holdingObject = throwable.gameObject;
+                }
+            }
+        }
+        else if (pickThrow && holdingObject)
+        {
+            holdingObject.GetComponent<Throwable>().ThrowThrowable();
+            holdingObject = null;
+        }
     }
     void CheckCameraLock()
     {

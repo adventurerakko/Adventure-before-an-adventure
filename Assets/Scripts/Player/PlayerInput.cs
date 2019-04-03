@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 public class PlayerInput : MonoBehaviour
 {
+    public bool CheckPickThrowInput()
+    {
+        return Input.GetButtonDown("PickThrow");
+    }
     public bool CheckAttackInput()
     {
         return Input.GetButtonDown("Attack");

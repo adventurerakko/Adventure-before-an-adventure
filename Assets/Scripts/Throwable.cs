@@ -11,13 +11,15 @@ public class Throwable : MonoBehaviour
     {
         collider = GetComponent<Collider>();
     }
-    public void PickUpThrowable()
+    public void PickUpThrowable(Transform parentTransform)
     {
+        this.transform.parent = parentTransform;
         isEquipped = true;
     }
     public void ThrowThrowable()
     {
         isEquipped = false;
+        this.transform.parent = null;
         this.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
     }
 }
