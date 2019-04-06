@@ -7,7 +7,7 @@ public class PlayerMain : MonoBehaviour
     [SerializeField] public CameraMain cameraMain;
     Animator animator;
 
-    [SerializeField] float pickUpDistance = 10f;
+    [SerializeField] float pickUpDistance = 10f, throwForce = 10f;
     GameObject holdingObject = null;
 
     [HideInInspector] public PlayerInput playerInput;
@@ -51,12 +51,23 @@ public class PlayerMain : MonoBehaviour
     }
     void Update()
     {
+        characterController.Move(Physics.gravity * Time.deltaTime);
         CheckCameraLock();
         CheckCameraRotate();
         CheckMovement();
         CheckAttack();
         CheckPickThrow();
+        CheckTalk();
         CheckDodge();
+        
+    }
+    void CheckTalk()
+    {
+        bool talk = playerInput.CheckTalk();
+        if (talk)
+        {
+            DialogueManager.instance.Talk();
+        }
     }
     void CheckPickThrow()
     {
@@ -76,7 +87,7 @@ public class PlayerMain : MonoBehaviour
         }
         else if (pickThrow && holdingObject)
         {
-            holdingObject.GetComponent<Throwable>().ThrowThrowable();
+            holdingObject.GetComponent<Throwable>().ThrowThrowable(throwForce, transform.forward);
             holdingObject = null;
         }
     }

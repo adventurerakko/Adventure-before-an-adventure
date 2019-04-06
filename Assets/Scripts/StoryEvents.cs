@@ -7,18 +7,16 @@ public class StoryEvents : MonoBehaviour
 {
     [SerializeField] string eventName = "";
     [SerializeField] string initialEventValue = "";
-    [SerializeField] EventManager eventManager;
     private void Start()
     {
-        Assert.IsNotNull(eventManager);
-        eventManager.AddStoryEvents(eventName, initialEventValue);
+        EventManager.instance.AddStoryEvents(eventName, initialEventValue);
     }
     private void OnTriggerEnter(Collider other)
     {
-        eventManager.UpdateStoryEvents(eventName, "passed");
+        EventManager.instance.UpdateStoryEvents(eventName, "passed");
     }
     private void OnTriggerExit(Collider other)
     {
-        eventManager.UpdateStoryEvents(eventName, "notpassed");
+        EventManager.instance.UpdateStoryEvents(eventName, "notpassed");
     }
 }

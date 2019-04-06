@@ -33,5 +33,4 @@ public class EventManager : MonoBehaviour
     {
         storyEvents.Add(key, value);
     }
-    
 }
