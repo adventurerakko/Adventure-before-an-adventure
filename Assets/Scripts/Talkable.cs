@@ -14,14 +14,14 @@ public class Talkable : MonoBehaviour
     // Update is called once per frame
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Player")
+        if(other.gameObject == ReferenceManager.instance.player)
         {
             DialogueManager.instance.AddTalkTarget(this.gameObject);
         }
     }
     private void OnTriggerExit(Collider other)
     {
-        if(other.gameObject.tag == "Player")
+        if(other.gameObject == ReferenceManager.instance.player)
         {
             DialogueManager.instance.RemoveTalkTarget(this.gameObject);
         }

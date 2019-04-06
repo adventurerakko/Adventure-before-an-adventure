@@ -4,8 +4,9 @@ using UnityEngine;
 using UnityEngine.Assertions;
 public class Throwable : MonoBehaviour
 {
-    [SerializeField]Collider collider;
     Rigidbody rigidbody;
+
+    [SerializeField] Collider collider;
     [SerializeField] int throwDamage = 2;
     [SerializeField] int health = 2;
     int Health
@@ -28,7 +29,7 @@ public class Throwable : MonoBehaviour
         IsEquipped, IsRooted, IsThrown
     }
     [SerializeField] States currentState = States.IsRooted;
-    // Start is called before the first frame update
+
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
@@ -55,7 +56,7 @@ public class Throwable : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Object")
+        if (collision.gameObject.tag == ReferenceManager.instance.referenceDictionary["LAYERPLAYER"] || collision.gameObject.tag == ReferenceManager.instance.referenceDictionary["LAYERENEMY"] || collision.gameObject.tag == ReferenceManager.instance.referenceDictionary["LAYEROBJECT"])
         {
             DamageTarget(collision.gameObject);
             DamageThis();

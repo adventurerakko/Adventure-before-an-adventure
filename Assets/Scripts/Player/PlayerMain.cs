@@ -109,6 +109,7 @@ public class PlayerMain : MonoBehaviour
     void CheckMovement()
     {
         Vector3 movementVector = playerInput.CheckMoveInput();
+        animator.SetFloat("MovementVector", movementVector.magnitude);
         if (movementVector != Vector3.zero)
         {
             animator.SetBool("IsMoving", true);

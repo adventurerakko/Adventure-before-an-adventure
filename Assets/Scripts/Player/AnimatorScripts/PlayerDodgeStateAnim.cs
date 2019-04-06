@@ -32,6 +32,6 @@ public class PlayerDodgeStateAnim : StateMachineBehaviour
     {
         if (playerMain.currentStateName != "Dodge")
             return;
-        characterController.Move(movementVector * dodgeDistance * Time.deltaTime * animationCurve.Evaluate(stateInfo.normalizedTime));
+        characterController.Move(Vector3.ClampMagnitude(movementVector, 1) * dodgeDistance * Time.deltaTime * animationCurve.Evaluate(stateInfo.normalizedTime));
     }
 }

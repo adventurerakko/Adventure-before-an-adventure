@@ -19,7 +19,7 @@ public class DialogueManager : MonoBehaviour
     }
     private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = ReferenceManager.instance.player;
     }
     public void AddTalkTarget(GameObject target)
     {
@@ -31,6 +31,8 @@ public class DialogueManager : MonoBehaviour
     }
     public void Talk()
     {
+        if (talkTargetsInRange.Count <= 0)
+            return;
         GameObject nearestTalkTarget = null;
         float nearestTalkTargetDistance = Mathf.Infinity;
         foreach (GameObject target in talkTargetsInRange)
