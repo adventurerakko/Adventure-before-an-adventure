@@ -603,13 +603,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 534669902}
-  m_LocalRotation: {x: 0.30070576, y: 0, z: 0, w: 0.953717}
-  m_LocalPosition: {x: 2.3322954, y: 25.35, z: -42.23}
+  m_LocalRotation: {x: 0.35836798, y: 0, z: 0, w: 0.93358046}
+  m_LocalPosition: {x: 2.3322954, y: 29.24, z: -39.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 35, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 42, y: 0, z: 0}
 --- !u!114 &534669906
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -623,7 +623,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 2132748772}
-  cameraOffsetDistance: 55
+  cameraOffsetDistance: 90
   smoothFollowSpeed: 0.1
   rotationSpeed: 120
   smoothCameraLockSpeed: 0.1
@@ -781,6 +781,19 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1345932831}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &1214399553
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1214399552}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!195 &1214399555
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -991,7 +1004,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100012, guid: 806a876ec0a0c1f4eaa7f3fc90ff2358, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100012, guid: 806a876ec0a0c1f4eaa7f3fc90ff2358, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 400012, guid: 806a876ec0a0c1f4eaa7f3fc90ff2358, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1398,11 +1415,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraMain: {fileID: 534669906}
-  pickUpDistance: 10
+  pickUpDistance: 5
   throwForce: 25
+  detectEnemyDistance: 25
+  nearestEnemy: {fileID: 0}
   playerInput: {fileID: 0}
   characterController: {fileID: 0}
-  eventManager: {fileID: 489007601}
 --- !u!114 &2132748775
 MonoBehaviour:
   m_ObjectHideFlags: 0

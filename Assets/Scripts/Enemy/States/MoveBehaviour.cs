@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Assertions;
 public class MoveBehaviour : StateMachineBehaviour
 {
     [SerializeField] float movementSpeed = 10f;
@@ -13,7 +12,6 @@ public class MoveBehaviour : StateMachineBehaviour
     Vector3 targetVector = Vector3.zero;
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        Assert.IsNotNull(navMeshAgent);
         navMeshAgent = animator.GetComponent<NavMeshAgent>();
         player = ReferenceManager.instance.Player;
         targetVector = (player.transform.position - animator.transform.position).normalized;

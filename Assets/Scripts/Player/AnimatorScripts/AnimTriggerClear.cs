@@ -6,10 +6,8 @@ public class AnimTriggerClear : StateMachineBehaviour
     [SerializeField] float triggerClearNormalizedTime = 0.75f;
     [SerializeField] string excludeParam = "";
     List<string> animParameterList = new List<string>();
-    PlayerMain playerMain;
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        playerMain = animator.GetComponent<PlayerMain>();
         foreach (var parameter in animator.parameters)
         {
             if (parameter.type == AnimatorControllerParameterType.Trigger)

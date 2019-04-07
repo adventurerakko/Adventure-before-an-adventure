@@ -29,7 +29,7 @@ public class DialogueManager : MonoBehaviour
     {
         talkTargetsInRange.Remove(target);
     }
-    public void Talk() // optimize code to look up only once
+    public void Talk()
     {
         if (talkTargetsInRange.Count <= 0)
             return;

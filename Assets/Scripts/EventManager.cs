@@ -23,7 +23,7 @@ public class EventManager : MonoBehaviour
     public void UpdateStoryEvents(string key, string value)
     {
         storyEvents[key] = value;
-        storyEventDelegate();
+        storyEventDelegate?.Invoke();
     }
     public string GetStoryEvents(string key)
     {

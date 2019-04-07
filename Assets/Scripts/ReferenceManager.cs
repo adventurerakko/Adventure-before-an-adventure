@@ -22,8 +22,8 @@ public class ReferenceManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         player = GameObject.FindGameObjectWithTag("Player");
-        referenceDictionary.Add("LAYERPLAYER", "Player");
-        referenceDictionary.Add("LAYERENEMY", "Enemy");
-        referenceDictionary.Add("LAYEROBJECT", "Object");
+        referenceDictionary.Add("CONST_LAYERPLAYER", "Player");
+        referenceDictionary.Add("CONST_LAYERENEMY", "Enemy");
+        referenceDictionary.Add("CONST_LAYEROBJECT", "Object");
     }
 }

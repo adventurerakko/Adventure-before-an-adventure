@@ -9,7 +9,6 @@ public class Talkable : MonoBehaviour
     {
         NotTalking, CurrentlyTalking
     }
-    Collider collider;
 
     private class DialogueData
     {

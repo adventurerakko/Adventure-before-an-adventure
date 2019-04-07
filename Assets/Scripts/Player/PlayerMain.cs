@@ -8,11 +8,14 @@ using UnityEngine.Assertions;
 public class PlayerMain : MonoBehaviour
 {
     [SerializeField] public CameraMain cameraMain;
-    Animator animator;
 
-    [SerializeField] float pickUpDistance = 10f, throwForce = 10f;
+    [SerializeField] float pickUpDistance = 10f, throwForce = 10f, detectEnemyDistance = 10f;
     GameObject holdingObject = null;
 
+    List<GameObject> enemiesInRange = new List<GameObject>();
+    public GameObject nearestEnemy = null;
+
+    Animator animator;
     [HideInInspector] public PlayerInput playerInput;
     [HideInInspector] public CharacterController characterController;
     private string CurrentStateName = "";
@@ -28,15 +31,12 @@ public class PlayerMain : MonoBehaviour
         }
     }
 
-    [SerializeField] EventManager eventManager;
-
     void Start()
     {
         characterController = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
         playerInput = GetComponent<PlayerInput>();
         Assert.IsNotNull(cameraMain);
-        Assert.IsNotNull(eventManager);
     }
     void Update()
     {
@@ -48,7 +48,6 @@ public class PlayerMain : MonoBehaviour
         CheckPickThrow();
         CheckTalk();
         CheckDodge();
-        
     }
     void CheckTalk()
     {
@@ -80,14 +79,44 @@ public class PlayerMain : MonoBehaviour
             holdingObject = null;
         }
     }
+    GameObject GetNearestEnemy()
+    {
+        GameObject nearestEnemy = null;
+        float nearestDistanceToEnemy = Mathf.Infinity;
+        Collider[] cols = Physics.OverlapSphere(transform.position, detectEnemyDistance);
+        foreach (Collider col in cols)
+        {
+            if (col && col.tag == "Enemy")
+            {
+                float distanceToEnemy = Vector3.Distance(transform.position, col.gameObject.transform.position);
+                if (distanceToEnemy < nearestDistanceToEnemy)
+                {
+                    nearestDistanceToEnemy = distanceToEnemy;
+                    nearestEnemy = col.gameObject;
+                }
+            }
+        }
+        return nearestEnemy;
+    }
     void CheckCameraLock()
     {
         bool cameraLock = playerInput.CheckCameraLockInput();
+        nearestEnemy = GetNearestEnemy();
+        animator.SetBool("IsLockedOn", false);
+        animator.SetBool("IsLockedOnWithEnemy", false);
         if (cameraLock)
         {
-            cameraMain.LockCamera(this.transform.rotation.eulerAngles.y);
+            if(nearestEnemy != null)
+            {
+                cameraMain.LockCamera(this.transform.rotation.eulerAngles.y, nearestEnemy);
+                animator.SetBool("IsLockedOnWithEnemy", true);
+            }
+            else
+            {
+                cameraMain.LockCamera(this.transform.rotation.eulerAngles.y);
+                animator.SetBool("IsLockedOn", true);
+            }
         }
-        animator.SetBool("IsLockedOn", cameraLock);
     }
     void CheckCameraRotate()
     {

@@ -1,14 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Assertions;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Collider))]
 public class Throwable : MonoBehaviour
 {
-    Rigidbody rigidbody;
-    Collider collider;
+    Rigidbody rb;
+    Collider col;
     [SerializeField] int throwDamage = 2;
     [SerializeField] int health = 2;
     int Health
@@ -34,20 +33,20 @@ public class Throwable : MonoBehaviour
 
     void Start()
     {
-        rigidbody = GetComponent<Rigidbody>();
-        collider = GetComponent<Collider>();
+        rb = GetComponent<Rigidbody>();
+        col = GetComponent<Collider>();
     }
     public void PickUpThrowable(Transform parentTransform)
     {
         currentState = States.IsEquipped;
         this.transform.parent = parentTransform;
-        rigidbody.isKinematic = true;
+        rb.isKinematic = true;
     }
     public void ThrowThrowable(float force, Vector3 throwDirection)
     {
         StartCoroutine(ThrowBuffer());
-        rigidbody.isKinematic = false;
-        rigidbody.AddForce((throwDirection + new Vector3(0, 1, 0)) * force, ForceMode.Impulse);        
+        rb.isKinematic = false; // must make non-kinematic before applying force
+        rb.AddForce((throwDirection + new Vector3(0, 1, 0)) * force, ForceMode.Impulse);        
         this.transform.parent = null;
         this.transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
     }
@@ -58,7 +57,7 @@ public class Throwable : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == ReferenceManager.instance.referenceDictionary["LAYERPLAYER"] || collision.gameObject.tag == ReferenceManager.instance.referenceDictionary["LAYERENEMY"] || collision.gameObject.tag == ReferenceManager.instance.referenceDictionary["LAYEROBJECT"])
+        if (collision.gameObject.tag == ReferenceManager.instance.referenceDictionary["CONST_LAYERPLAYER"] || collision.gameObject.tag == ReferenceManager.instance.referenceDictionary["CONST_LAYERENEMY"] || collision.gameObject.tag == ReferenceManager.instance.referenceDictionary["CONST_LAYEROBJECT"])
         {
             DamageTarget(collision.gameObject);
             DamageThis();
@@ -66,9 +65,9 @@ public class Throwable : MonoBehaviour
             return;
         }
         
-        if (currentState == States.IsThrown && Physics.Raycast(transform.position, Vector3.down, collider.bounds.extents.y + 0.1f))
+        if (currentState == States.IsThrown && Physics.Raycast(transform.position, Vector3.down, col.bounds.extents.y + 0.1f))
         {
-            rigidbody.isKinematic = true;
+            rb.isKinematic = true;
             currentState = States.IsRooted;
             return;
         }
@@ -79,6 +78,5 @@ public class Throwable : MonoBehaviour
     }
     void DamageTarget(GameObject target)
     {
-
     }
 }
