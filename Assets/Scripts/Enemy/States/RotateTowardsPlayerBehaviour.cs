@@ -8,16 +8,11 @@ public class RotateTowardsPlayerBehaviour : StateMachineBehaviour
     [SerializeField] float turnSpeed = 0.1f;
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        player = ReferenceManager.instance.player;
+        player = ReferenceManager.instance.Player;
     }
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         animator.transform.rotation = Quaternion.Slerp(animator.transform.rotation, Quaternion.LookRotation(player.transform.position - animator.transform.position), turnSpeed);
-    }
-
-    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-
     }
 }

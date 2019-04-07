@@ -5,8 +5,12 @@ using UnityEngine;
 public class ReferenceManager : MonoBehaviour
 {
     public static ReferenceManager instance = null;
-    public GameObject player;
     public Dictionary<string, string> referenceDictionary = new Dictionary<string, string>();
+    public GameObject Player { get {
+            return player;
+        } }
+    private GameObject player;
+    
     private void Awake()
     {
         if (instance == null)
@@ -21,9 +25,5 @@ public class ReferenceManager : MonoBehaviour
         referenceDictionary.Add("LAYERPLAYER", "Player");
         referenceDictionary.Add("LAYERENEMY", "Enemy");
         referenceDictionary.Add("LAYEROBJECT", "Object");
-    }
-    private void Start()
-    {
-        
     }
 }

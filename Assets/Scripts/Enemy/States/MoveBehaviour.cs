@@ -2,18 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Assertions;
 public class MoveBehaviour : StateMachineBehaviour
 {
-    NavMeshAgent navMeshAgent;
     [SerializeField] float movementSpeed = 10f;
     [SerializeField] bool moveTowardsTarget = false;
-    GameObject target = null;
+
+    NavMeshAgent navMeshAgent;
+    GameObject player = null;
     Vector3 targetVector = Vector3.zero;
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        target = ReferenceManager.instance.player;
+        Assert.IsNotNull(navMeshAgent);
         navMeshAgent = animator.GetComponent<NavMeshAgent>();
-        targetVector = (target.transform.position - animator.transform.position).normalized;
+        player = ReferenceManager.instance.Player;
+        targetVector = (player.transform.position - animator.transform.position).normalized;
         animator.transform.rotation = Quaternion.LookRotation(targetVector);
     }
 

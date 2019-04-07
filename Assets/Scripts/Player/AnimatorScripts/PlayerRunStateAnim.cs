@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Assertions;
 public class PlayerRunStateAnim : StateMachineBehaviour
 {
     [SerializeField] float movementSpeed = 10f;
@@ -11,9 +11,12 @@ public class PlayerRunStateAnim : StateMachineBehaviour
     PlayerMain playerMain;
 
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    { 
+    {
         characterController = animator.GetComponent<CharacterController>();
         playerMain = animator.GetComponent<PlayerMain>();
+        Assert.IsNotNull(characterController);
+        Assert.IsNotNull(playerMain);
+
         playerMain.currentStateName = "Run";
     }
 

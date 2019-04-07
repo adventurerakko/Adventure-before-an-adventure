@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
+[RequireComponent(typeof(CharacterController))]
+[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(PlayerInput))]
 public class PlayerMain : MonoBehaviour
 {
     [SerializeField] public CameraMain cameraMain;
@@ -12,7 +15,6 @@ public class PlayerMain : MonoBehaviour
 
     [HideInInspector] public PlayerInput playerInput;
     [HideInInspector] public CharacterController characterController;
-    [HideInInspector] public List<string> animParameterList = new List<string>();
     private string CurrentStateName = "";
     [HideInInspector] public string currentStateName
     {
@@ -35,19 +37,6 @@ public class PlayerMain : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         Assert.IsNotNull(cameraMain);
         Assert.IsNotNull(eventManager);
-
-        foreach(var parameter in animator.parameters)
-        {
-            if(parameter.type == AnimatorControllerParameterType.Trigger)
-            {
-                animParameterList.Add(parameter.name);
-            }
-        }
-        eventManager.storyEventDelegate += PrintEvent;
-    }
-    void PrintEvent()
-    {
-        print(eventManager.GetStoryEvents("test"));
     }
     void Update()
     {

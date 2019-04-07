@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
+
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Collider))]
 public class Throwable : MonoBehaviour
 {
     Rigidbody rigidbody;
-
-    [SerializeField] Collider collider;
+    Collider collider;
     [SerializeField] int throwDamage = 2;
     [SerializeField] int health = 2;
     int Health

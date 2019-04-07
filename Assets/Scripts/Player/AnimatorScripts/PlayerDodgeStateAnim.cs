@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Assertions;
 public class PlayerDodgeStateAnim : StateMachineBehaviour
 {
     [SerializeField] AnimationCurve animationCurve = null;
@@ -13,6 +13,8 @@ public class PlayerDodgeStateAnim : StateMachineBehaviour
 
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        Assert.IsNotNull(characterController);
+        Assert.IsNotNull(playerMain);
         characterController = animator.GetComponent<CharacterController>();
         playerMain = animator.GetComponent<PlayerMain>();
         playerMain.currentStateName = "Dodge";

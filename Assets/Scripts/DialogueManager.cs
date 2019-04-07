@@ -6,7 +6,7 @@ public class DialogueManager : MonoBehaviour
 {
     public static DialogueManager instance = null;
     GameObject player;
-    [SerializeField] List<GameObject> talkTargetsInRange = new List<GameObject>();
+    List<GameObject> talkTargetsInRange = new List<GameObject>();
     private void Awake()
     {
         if (instance == null)
@@ -19,7 +19,7 @@ public class DialogueManager : MonoBehaviour
     }
     private void Start()
     {
-        player = ReferenceManager.instance.player;
+        player = ReferenceManager.instance.Player;
     }
     public void AddTalkTarget(GameObject target)
     {
@@ -29,7 +29,7 @@ public class DialogueManager : MonoBehaviour
     {
         talkTargetsInRange.Remove(target);
     }
-    public void Talk()
+    public void Talk() // optimize code to look up only once
     {
         if (talkTargetsInRange.Count <= 0)
             return;

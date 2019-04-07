@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class DetectPlayerBehaviour : StateMachineBehaviour
 {
-    GameObject target;
+    GameObject player;
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        target = ReferenceManager.instance.player;
+        player = ReferenceManager.instance.Player;
     }
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.SetFloat("DistanceFromPlayer", Vector3.Distance(animator.transform.position, target.transform.position));
+        animator.SetFloat("DistanceFromPlayer", Vector3.Distance(animator.transform.position, player.transform.position));
     }
 }
