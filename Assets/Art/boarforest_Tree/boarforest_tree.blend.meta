@@ -7,22 +7,78 @@ ModelImporter:
     100002: Cube_004
     100004: Plane_000
     100006: Plane_040
+    100008: Plane_001
+    100010: Plane_002
+    100012: Plane_003
+    100014: Plane_004
+    100016: Plane_005
+    100018: Plane_006
+    100020: Plane_007
+    100022: Plane_008
+    100024: Plane_009
+    100026: Plane_010
+    100028: Sphere
     400000: //RootNode
     400002: Cube_004
     400004: Plane_000
     400006: Plane_040
+    400008: Plane_001
+    400010: Plane_002
+    400012: Plane_003
+    400014: Plane_004
+    400016: Plane_005
+    400018: Plane_006
+    400020: Plane_007
+    400022: Plane_008
+    400024: Plane_009
+    400026: Plane_010
+    400028: Sphere
     2100000: Material__boarforest_tree_Leaves_Diffuse_png
     2100002: Material_002
     2100004: Material_003
+    2100006: unnamed
     2300000: Cube_004
     2300002: Plane_000
     2300004: Plane_040
+    2300006: Plane_001
+    2300008: Plane_002
+    2300010: Plane_003
+    2300012: Plane_004
+    2300014: Plane_005
+    2300016: Plane_006
+    2300018: Plane_007
+    2300020: Plane_008
+    2300022: Plane_009
+    2300024: Plane_010
+    2300026: Sphere
     3300000: Cube_004
     3300002: Plane_000
     3300004: Plane_040
+    3300006: Plane_001
+    3300008: Plane_002
+    3300010: Plane_003
+    3300012: Plane_004
+    3300014: Plane_005
+    3300016: Plane_006
+    3300018: Plane_007
+    3300020: Plane_008
+    3300022: Plane_009
+    3300024: Plane_010
+    3300026: Sphere
     4300000: Plane_000
     4300002: Plane_040
     4300004: Cube_004
+    4300006: Plane_010
+    4300008: Plane_009
+    4300010: Plane_008
+    4300012: Plane_007
+    4300014: Plane_006
+    4300016: Plane_005
+    4300018: Plane_004
+    4300020: Plane_003
+    4300022: Plane_002
+    4300024: Plane_001
+    4300026: Sphere
     7400000: Default Take
     9500000: //RootNode
   externalObjects: {}

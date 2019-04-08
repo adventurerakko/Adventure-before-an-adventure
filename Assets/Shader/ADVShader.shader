@@ -33,18 +33,24 @@
 		float _HighlightIntensity;
 		//optimize this shader code **********
 		half4 LightingADVToon(SurfaceOutput s, half3 lightDir, half atten) {
+
 			half NdotL = dot(s.Normal, lightDir);
 			half4 c;
-			if (NdotL > 0.5) {
-				c.rgb = s.Albedo * _Highlight.rgb * _HighlightIntensity;
+			if (_WorldSpaceLightPos0.w == 0) {// if is using directional light 
+
+				if (NdotL > 0.5) {
+					c.rgb = s.Albedo * _Highlight.rgb * _HighlightIntensity * NdotL;
+				}
+				else {
+					c.rgb = s.Albedo * _Shadow.rgb;
+				}
+				c.a = s.Alpha;
+		}
+		else { // if using point light
+				c.rgb = s.Albedo * _Highlight.rgb * _HighlightIntensity * atten * _LightColor0.rgb;
 			}
-			else {
-				c.rgb = s.Albedo * _Shadow.rgb;
-			}
-			if (atten < 0.5) {
-				c.rgb = s.Albedo * _Shadow.rgb;
-			}
-			c.a = s.Alpha;
+	
+			
 			return c;
 		}
 

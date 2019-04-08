@@ -48,13 +48,13 @@
 			half NdotL = dot(s.Normal, lightDir);
 			half4 c;
 			if (NdotL > 0.5) {
-				c.rgb = s.Albedo * _Highlight.rgb * _HighlightIntensity;
+				c.rgb = s.Albedo * _Highlight.rgb * _HighlightIntensity * atten;
 			}
 			else {
-				c.rgb = s.Albedo * _Shadow.rgb;
+				c.rgb = s.Albedo * _Shadow.rgb * atten;
 			}
 			if (atten < 0.5) {
-				c.rgb = s.Albedo * _Shadow.rgb;
+				c.rgb = s.Albedo * _Shadow.rgb * atten;
 			}
 			c.a = s.Alpha;
 			return c;
