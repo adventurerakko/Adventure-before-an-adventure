@@ -40,14 +40,12 @@
 			half NdotL = dot(s.Normal, lightDir);
 			half4 c;
 			if ((NdotL + (s.HSMValue.r - _testVal)) / 2 > 0.5) {
-				c.rgb = s.Albedo * _Highlight.rgb * _HighlightIntensity * (NdotL);
+				c.rgb = s.Albedo * _Highlight.rgb * _HighlightIntensity * (NdotL * NdotL);
 			}
 			else {
 				c.rgb = s.Albedo * _Shadow.rgb;
 			}
-			if (atten < 0.5) {
-				c.rgb = s.Albedo * _Shadow.rgb;
-			}
+
 
 			c.a = s.Alpha;
 			return c;
@@ -89,15 +87,13 @@
 		half4 LightingADVToon(SurfaceOutputCustom s, half3 lightDir, half atten) {
 			half NdotL = dot(s.Normal, lightDir);
 			half4 c;
-			if ((NdotL + (s.HSMValue.r - _testVal)) / 2 > 0.5) {
+			if ((NdotL) > 0.5) {
 				c.rgb = s.Albedo * _Highlight.rgb * _HighlightIntensity * (NdotL);
 			}
 			else {
 				c.rgb = s.Albedo * _Shadow.rgb;
 			}
-			if (atten < 0.5) {
-				c.rgb = s.Albedo * _Shadow.rgb;
-			}
+
 			
 			c.a = s.Alpha;
 			return c;

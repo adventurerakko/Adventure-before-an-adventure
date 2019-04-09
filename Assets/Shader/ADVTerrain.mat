@@ -41,7 +41,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _HighlightIntensity: 1
-    - _Splat0Tilling: 30
+    - _Splat0Tilling: 100
     - _Splat1Tilling: 30
     - _Splat2Tilling: 30
     - _Splat3Tilling: 30
